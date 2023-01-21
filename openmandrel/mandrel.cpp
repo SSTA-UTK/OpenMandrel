@@ -1,5 +1,14 @@
 #include "mandrel.h"
 
+Vec2 AxisymmetricMandrelSegment::CylindricalCoords(double t) {
+    return Vec2(Radius(t).real(), Height(t).real());
+}
+
+Vec2 AxisymmetricMandrelSegment::CylindricalDerivatives(double t) {
+    double h = 1.0E-10;
+    return Vec2(Radius(std::complex<double>(t, h)).imag()/h, Height(std::complex<double>(t, h)).imag()/h);
+}
+
 LinearTransitionMandrel::LinearTransitionMandrel(double D0, double D1, double L) :
     D0(D0),
     D1(D1),
