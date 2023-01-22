@@ -5,7 +5,7 @@
 
 
 
-AxisymmetricWinder::AxisymmetricWinder(double Width, int NumberOfPoints=15) {
+AxisymmetricWinder::AxisymmetricWinder(double Width, double InitialWindingAngle,int NumberOfPoints=15) {
     this->NumberOfPoints = NumberOfPoints;
     BandWidth = Width;
 }
@@ -15,15 +15,20 @@ double AxisymmetricWinder::getWindAngle(int T0, int T1) {
     return WindingAngle;
 }
 
+void AxisymmetricWinder::setClairaultRelation(AxisymmetricMandrelSegment &segment,double t) {
+    ClairaultRelation = segment.Radius(t).real() * WindingAngle;
+}
+
 double AxisymmetricWinder::getMinimumRadius(int T0, int T1) {
     // get coords at T0 and T1
     // calculate distance between coordinates on the 
+    return 1.;
 }
 
 
-double AxisymmetricWinder::getPitch(double WindingAngle, double MandrelDiameter) {
+double AxisymmetricWinder::getPitch(double WindingAngle, AxisymmetricMandrelSegment &segment, double t) {
     // returns the Pitch
-    return (PI*MandrelDiameter)/(tan(WindingAngle));
+    return (PI*segment.Radius(t).real()*2)/(tan(WindingAngle));
 }
 
 void AxisymmetricWinder::setWindingAngle(double Angle) {
