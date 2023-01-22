@@ -1,25 +1,12 @@
 #pragma once
 
+#include <glm/glm.hpp>
 #include <utility>
 
 #define PI 4.0*atan(1.0)
 
-class Vec2 {
-public:
-    double x, y;
-
-    Vec2(double x, double y) :
-        x(x),
-        y(y) { }
-};
-
-class Vec3 {
-public:
-    double x, y, z;
-
-    Vec3(double x, double y, double z) :
-        x(x), y(y), z(z) { }
-};
+typedef glm::vec<2, double> Vec2;
+typedef glm::vec<3, double> Vec3;
 
 class Quadrature {
 public:

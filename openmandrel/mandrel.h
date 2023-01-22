@@ -5,20 +5,6 @@
 #include <vector>
 #include <memory>
 
-class AxisymmetricMandrel {
-public:
-    // Will only return true if geometry is continuous and fits within machine bounds
-    bool IsValid();
-    // Must be called before asking for which geometry is at which location
-    void Prepare();
-private:
-    struct SegmentInfo {
-        std::unique_ptr<AxisymmetricMandrelSegment> geometry;
-        double cachedLength;
-    };
-    std::vector<SegmentInfo> segments;
-};
-
 class AxisymmetricMandrelSegment {
 public:
     AxisymmetricMandrelSegment();
@@ -33,10 +19,24 @@ public:
     Vec2 CylindricalDerivatives(double t);
 };
 
-class LinearTransitionMandrel : public AxisymmetricMandrelSegment {
+class AxisymmetricMandrel {
 public:
-    double D0, D1, L;
+    // Will only return true if geometry is continuous and fits within machine bounds
+    bool IsValid();
+    // Must be called before asking for which geometry is at which location
+    void Prepare();
+private:
+    struct SegmentInfo {
+        std::unique_ptr<AxisymmetricMandrelSegment> geometry;
+        double cachedLength;
+    };
+    std::vector<SegmentInfo> segments;
+};
 
+class LinearTransitionMandrel : public AxisymmetricMandrelSegment {
+private:
+    double D0, D1, L;
+public:
     LinearTransitionMandrel(double D0, double D1, double L);
     
     std::complex<double> Radius(const std::complex<double>& t) override;
@@ -44,12 +44,32 @@ public:
 };
 
 class PowerSeriesMandrel : public AxisymmetricMandrelSegment {
-public:
+private:
     double power;
-    double D_base, h;
-
-    PowerSeriesMandrel(double power, double D_base, double h);
+    double D1, L, t0;
+public:
+    PowerSeriesMandrel(double power, double D0, double D1, double L);
 
     std::complex<double> Radius(const std::complex<double>& t) override;
     std::complex<double> Height(const std::complex<double>& t) override;
 };
+
+class EllipticalMandrel : public AxisymmetricMandrelSegment {
+private:
+    double D1, L, t0;
+public:
+    EllipticalMandrel(double D0, double D1, double L);
+
+    std::complex<double> Radius(const std::complex<double>& t) override;
+    std::complex<double> Height(const std::complex<double>& t) override;
+};
+
+/*class TangentOgiveMandrel : public AxisymmetricMandrelSegment {
+private:
+    double D0, D1, L;
+public:
+    TangentOgiveMandrel(double D0, double D1, double L);
+
+    std::complex<double> Radius(const std::complex<double>& t) override;
+    std::complex<double> Height(const std::complex<double>& t) override;
+};*/
