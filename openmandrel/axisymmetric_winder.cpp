@@ -36,7 +36,7 @@ void AxisymmetricWinder::setWindingAngle(double Angle) {
 }
 
 // returns the number of circuits required to cover the specific parameter given
-std::complex<double> AxisymmetricWinder::getRequiredCircuits(AxisymmetricMandrelSegment &segment, double t) {
+int AxisymmetricWinder::getRequiredCircuits(AxisymmetricMandrelSegment &segment, double t) {
     int NumberOfCircuits;
     double Circuits;
     // get the coords in reals

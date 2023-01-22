@@ -6,7 +6,7 @@ class AxisymmetricWinder {
 
         Vec2 calcWoundMandrelSegment(AxisymmetricMandrelSegment &segment);
         AxisymmetricWinder(double BandWidth,int NumberOfPoints=15);
-        void setClairaultRelation(AxisymmetricMandrelSegment &segment,double t)
+        void setClairaultRelation(AxisymmetricMandrelSegment &segment,double t);
         double getPitch(double WindingAngle, AxisymmetricMandrelSegment &segment, double t); // P
         void setWindingAngle(double Angle);
         double getWindAngle(int T0, int T1);
