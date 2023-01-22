@@ -11,7 +11,7 @@ class AxisymmetricWinder {
         void setWindingAngle(double Angle);
         double getWindAngle(int T0, int T1);
         double getMinimumRadius(int T0, int T1);
-        int getRequiredCircuits(AxisymmetricMandrelSegment &segment, double t);
+        int getRequiredCircuits(AxisymmetricMandrelSegment *segment, double t);
     private:
         Vec2 C;
         Quadrature integral;
