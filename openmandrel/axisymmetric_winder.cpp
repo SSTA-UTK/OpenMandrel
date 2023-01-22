@@ -1,5 +1,6 @@
 #include "axisymmetric_winder.h"
 #include "mandrel.h"
+#include "winder.h"
 
 
 
@@ -12,11 +13,11 @@ AxisymmetricWinder::AxisymmetricWinder(double BandWidth,int NumberOfPoints=15) {
 
 
 double AxisymmetricWinder::getWindAngle(int T0, int T1) {
-    return WindingAngle;
+    return windAngle;
 }
 
 void AxisymmetricWinder::setClairaultRelation(AxisymmetricMandrelSegment *segment,double t) {
-    ClairaultRelation = segment->Radius(t).real() * WindingAngle;
+    ClairaultRelation = segment->Radius(t).real() * windAngle;
 }
 
 double AxisymmetricWinder::getMinimumRadius(int T0, int T1) {
@@ -26,13 +27,13 @@ double AxisymmetricWinder::getMinimumRadius(int T0, int T1) {
 }
 
 
-double AxisymmetricWinder::getPitch(double WindingAngle, AxisymmetricMandrelSegment *segment, double t) {
+double AxisymmetricWinder::getPitch(double windAngle, AxisymmetricMandrelSegment *segment, double t) {
     // returns the Pitch
-    return (PI*segment->Radius(t).real()*2)/(tan(WindingAngle));
+    return (PI*segment->Radius(t).real()*2)/(tan(windAngle));
 }
 
-void AxisymmetricWinder::setWindingAngle(double Angle) {
-    WindingAngle = Angle;
+void AxisymmetricWinder::setwindAngle(double Angle) {
+    windAngle = Angle;
 }
 
 // returns the number of circuits required to cover the specific parameter given
@@ -43,7 +44,7 @@ int AxisymmetricWinder::getRequiredCircuits(AxisymmetricMandrelSegment *segment,
     // calculate diameter between coords
     // use diameter in calculation
     double Diameter = 2*segment->Radius(t).real();
-    Circuits = PI * Diameter * cos(WindingAngle) / BandWidth;
+    Circuits = PI * Diameter * cos(windAngle) / BandWidth;
     
     // make sure it rounds up when necessary.
     double test = Circuits - int(Circuits);
