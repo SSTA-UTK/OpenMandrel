@@ -18,7 +18,7 @@ class AxisymmetricWinder {
         double getPitch(double WindAngle, double MandrelDiameter); // P
         void setWindingAngle(double Angle); // alpha
         int requiredCircuits; // N
-        std::complex<double> getRequiredCircuits(AxisymmetricMandrelSegment &segment, int parameter);
+        int getRequiredCircuits(AxisymmetricMandrelSegment &segment, double t);
 
 };
 

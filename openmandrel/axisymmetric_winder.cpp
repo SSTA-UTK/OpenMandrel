@@ -12,16 +12,14 @@ AxisymmetricWinder::AxisymmetricWinder(double Width, int NumberOfPoints=15) {
 
 
 double AxisymmetricWinder::getWindAngle(int T0, int T1) {
-    // solve nonlinear differential equation
-    // get magnitude of t vector and T vector
-    // dot product to obtain angle
-    return -1;
+    return WindingAngle;
 }
 
 double AxisymmetricWinder::getMinimumRadius(int T0, int T1) {
     // get coords at T0 and T1
     // calculate distance between coordinates on the 
 }
+
 
 double AxisymmetricWinder::getPitch(double WindingAngle, double MandrelDiameter) {
     // returns the Pitch
@@ -32,8 +30,22 @@ void AxisymmetricWinder::setWindingAngle(double Angle) {
     WindingAngle = Angle;
 }
 
-std::complex<double> AxisymmetricWinder::getRequiredCircuits(AxisymmetricMandrelSegment &segment, int parameter) {
-    std::complex<double> NumberOfCircuits = 2 * PI * segment.Radius(parameter) * cos(WindingAngle) / BandWidth;
-    //double Diameter = complex(2) *segment.Radius(parameter);
-    return NumberOfCircuits;
+// returns the number of circuits required to cover the specific parameter given
+std::complex<double> AxisymmetricWinder::getRequiredCircuits(AxisymmetricMandrelSegment &segment, double t) {
+    int NumberOfCircuits;
+    double Circuits;
+    // get the coords in reals
+    // calculate diameter between coords
+    // use diameter in calculation
+    double Diameter = 2*segment.Radius(t).real();
+    Circuits = PI * Diameter * cos(WindingAngle) / BandWidth;
+    
+    // make sure it rounds up when necessary.
+    double test = Circuits - int(Circuits);
+    if(test >= 0.5) {
+        NumberOfCircuits += 0.5;
+    }
+
+
+    return int(NumberOfCircuits);
 }
