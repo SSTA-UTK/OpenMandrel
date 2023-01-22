@@ -7,7 +7,7 @@
 
 AxisymmetricWinder::AxisymmetricWinder(double BandWidth,int NumberOfPoints=15) {
     this->NumberOfPoints = NumberOfPoints;
-    BandWidth = Width;
+    this->BandWidth = BandWidth;
 }
 
 
