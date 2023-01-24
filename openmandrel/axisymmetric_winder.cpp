@@ -1,6 +1,7 @@
 #include "axisymmetric_winder.h"
 #include "mandrel.h"
 #include "winder.h"
+#include "math.h"
 
 
 
@@ -54,4 +55,26 @@ int AxisymmetricWinder::getRequiredCircuits(AxisymmetricMandrelSegment *segment,
 
 
     return int(NumberOfCircuits);
+}
+
+double AxisymmetricWinder::solveExitAngle(AxisymmetricMandrelSegment *segment, double WindingAngle) {
+    //
+}
+
+void AxisymmetricWinder::TrapezoidalPathFinder(AxisymmetricMandrelSegment *segment, Type type) {
+    // create quadrature
+    Quadrature quad(15,0,1,type);
+    pair<double,double> phi = <0,0>;
+    double radius = segment->Radius(0);
+    double alpha = getWindAngle();
+    for(int i = 0; i < quad.size; i++) {
+        // get pair at index
+        t = quad.xw[i].first;
+        // weight
+        w = quad.xw[i].second;
+        pair<double, double> derivatives = segment->CylindricalDerivatives(t);
+        phi += w*sqrt(pow(derivatives.first,2) + pow(derivatives.second,2) )/( sqrt(pow(derivatives.first,2) - pow(derivatives.second,2)) );
+        radius = segment->Radius(t);
+    }
+    return phi;
 }

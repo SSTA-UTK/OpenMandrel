@@ -12,15 +12,19 @@ class AxisymmetricWinder {
         double getWindAngle(int T0, int T1);
         double getMinimumRadius(int T0, int T1);
         int getRequiredCircuits(AxisymmetricMandrelSegment *segment, double t);
+        double solveExitAngle(AxisymmetricMandrelSegment *segment, double WindingAngle);
+        std::pair<double,double> TrapezoidalPathFinder(AxisymmetricMandrelSegment *segment, double t);
     private:
         Vec2 C;
         Quadrature integral;
-        Vec3 WindPosition;
+        Vec3 windPosition;
         double ClairaultRelation; // NOTE: might cause issues later with rounding errors
         int NumberOfPoints;
         double windAngle; // alpha
         double BandWidth; // B
         int requiredCircuits; // N
+        Vec3 bundleDirection;
+        Vec3 bundleBidirection;
 
 };
 
