@@ -13,7 +13,7 @@ class AxisymmetricWinder {
         double getMinimumRadius(int T0, int T1);
         int getRequiredCircuits(AxisymmetricMandrelSegment *segment, double t);
         double solveExitAngle(AxisymmetricMandrelSegment *segment, double WindingAngle);
-        std::pair<double,double> TrapezoidalPathFinder(AxisymmetricMandrelSegment *segment, double t);
+        std::pair<double,double> PathFinder(AxisymmetricMandrelSegment *segment, double t); // returns coordinate of next point on geodesic
     private:
         Vec2 C;
         Quadrature integral;

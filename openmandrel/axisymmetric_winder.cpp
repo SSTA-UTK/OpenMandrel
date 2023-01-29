@@ -61,7 +61,7 @@ double AxisymmetricWinder::solveExitAngle(AxisymmetricMandrelSegment *segment, d
     //
 }
 
-void AxisymmetricWinder::TrapezoidalPathFinder(AxisymmetricMandrelSegment *segment, Type type) {
+void AxisymmetricWinder::PathFinder(AxisymmetricMandrelSegment *segment, Type type) {
     // create quadrature
     Quadrature quad(15,0,1,type);
     pair<double,double> phi = <0,0>;
