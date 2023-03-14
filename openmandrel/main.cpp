@@ -23,6 +23,7 @@ void DisplayWindow(float wsx, float wsy) {
 
     static int passes = 0;
     // main menu bar
+    ImGui::Begin("OpenMandrel", &my_tool_active, ImGuiWindowFlags_MenuBar);
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New")) { }
@@ -55,7 +56,7 @@ void DisplayWindow(float wsx, float wsy) {
         for(int i = 0; i < size; i++) 
         {
             char label[128];
-            sprintf(label, "Pass %d);
+            sprintf(label, "Pass %d");
         }
     }
     }
