@@ -6,7 +6,6 @@
 #include <windef.h>
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
-#include "gui.cpp"
 
 
 //TODO: replace this with the code in main
