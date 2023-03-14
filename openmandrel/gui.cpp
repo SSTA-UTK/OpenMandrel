@@ -6,13 +6,15 @@
 #include <windef.h>
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
+#include "gui.cpp"
 
 
 //TODO: replace this with the code in main
 #include <Windows.h>
 
 template<typename Derived>
-class Gui : public Gui<MyGui> {
+class MyGui : public Gui<MyGui> 
+{
     public:
         Gui()
         {
@@ -147,7 +149,7 @@ class Gui : public Gui<MyGui> {
         SDL_Window* window;
         // Our state
         ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-}
+};
 
 int main(int, char**) {
     MyGui gui;
