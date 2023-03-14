@@ -20,6 +20,9 @@ extern "C" {
 #endif
 
 void DisplayWindow(float wsx, float wsy) {
+
+    static int passes = 0;
+    // main menu bar
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New")) { }
@@ -32,7 +35,33 @@ void DisplayWindow(float wsx, float wsy) {
     }
     ImGui::SetNextWindowPos(ImVec2(0.0F, 0.0F));
     ImGui::SetNextWindowSize(ImVec2(0.4F*wsx, wsy));
+
+    // tab bar for traces
+    if (ImGui::Begin("Passes",p_open, ImGuiWindowFlags_MenuBar)) {
+        if(ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("Passes")) {
+                if(ImGui::MenuItem("Close", "Ctrl+W")) {*p_open = false;}
+                ImGui::EndMenu();
+            }
+        }
+        ImGui::EndMenuBar();
+
+        ImGui::SliderInt("Passes", &passes, 1, 100); 
+
+        // Left pane of passes
+        static int selected = 0;
+
+        ImGui::BeginChild("Passes List", ImVec2(150,0), true);
+        for(int i = 0; i < size; i++) 
+        {
+            char label[128];
+            sprintf(label, "Pass %d);
+        }
+    }
+    }
+
 }
+
 
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
